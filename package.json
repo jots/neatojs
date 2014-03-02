@@ -1,0 +1,27 @@
+{
+  "name": "NeatoJS",
+  "description": "javascript stuffs",
+  "author": {
+    "name": "Joseph McDonald",
+    "email": "joe@vpop.net"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "readmeFilename": "README.md",
+  "version": "0.0.1",
+  "engines": {
+    "node": "0.10.x"
+  },
+  "devDependencies": {
+    "gulp": "latest",
+    "bower": "latest",
+    "coffee-script": "latest",
+    "gulp-coffee": "latest",
+    "gulp-concat": "latest",
+    "gulp-clean": "latest",
+    "gulp-util": "latest",
+    "gulp-plumber": "latest"
+  }
+}
