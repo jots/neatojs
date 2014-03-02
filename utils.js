@@ -1,4 +1,4 @@
-var CSSRULES, E, addStyles, blankCss, ce, changeRule, changeRule2, commify, dc, dim, fc, g, gc, gcf, getClassNum, getSS, getScrollbarWidth, insertAfter, isArray, makeWidths, qs, randStr, rn, sameHeight, toggleClass;
+var CSSRULES, E, addStyles, blankCss, body, ce, changeRule, changeRule2, commify, dc, dim, doc, doc_elem, fc, g, gc, gcf, getClassNum, getSS, getScrollY, getScrollbarWidth, insertAfter, isArray, isOutOfBounds, makeWidths, qs, randStr, rn, sameHeight, toggleClass;
 
 E = Element.prototype;
 
@@ -154,12 +154,42 @@ insertAfter = function(referenceNode, newNode) {
     } else {
       return (document.documentElement || document.body.parentNode || document.body).scrollTop;
     }
-  },
+  }
+});
+
+doc = document;
+
+body = doc.body;
+
+doc_elem = doc.documentElement;
+
+getScrollY = function() {
+  if (window.pageYOffset !== void 0) {
+    return window.pageYOffset;
+  }
+  return (doc_elem || body.parentNode || body).scrollTop;
+};
+
+isOutOfBounds = function(y) {
+  var pastBottom, pastTop, scrollY;
+  if (y == null) {
+    y = null;
+  }
+  scrollY = getScrollY();
+  if (y === null) {
+    y = scrollY;
+  }
+  pastTop = y < 0;
+  pastBottom = scrollY + getViewportHeight() > getDocumentHeight();
+  return pastTop || pastBottom;
+};
+
+({
   getViewportHeight: function() {
     return window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
   },
   getDocumentHeight: function() {
-    var body, documentElement;
+    var documentElement;
     body = document.body;
     documentElement = document.documentElement;
     return Math.max(body.scrollHeight, documentElement.scrollHeight, body.offsetHeight, documentElement.offsetHeight, body.clientHeight, documentElement.clientHeight);
@@ -336,7 +366,7 @@ String.prototype.trim = function() {
 };
 
 getScrollbarWidth = function() {
-  var W, body, div;
+  var W, div;
   W = window.browserScrollbarWidth;
   if (W === undefined) {
     body = document.body;
