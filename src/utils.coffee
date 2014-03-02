@@ -89,6 +89,22 @@ insertAfter = (referenceNode, newNode) ->
 getScrollY: ->
   (if (window.pageYOffset isnt `undefined`) then window.pageYOffset else (document.documentElement or document.body.parentNode or document.body).scrollTop)
 
+doc = document
+body = doc.body
+doc_elem = doc.documentElement
+
+getScrollY = ->
+  if window.pageYOffset != undefined
+    return window.pageYOffset
+  return (doc_elem || body.parentNode || body).scrollTop;
+
+                              
+isOutOfBounds = (y=null) ->
+  scrollY = getScrollY()
+  y = scrollY if y == null
+  pastTop  = y < 0
+  pastBottom = scrollY + getViewportHeight() > getDocumentHeight()
+  return pastTop || pastBottom
 
 # Gets the height of the viewport
 # http://andylangton.co.uk/blog/development/get-viewport-size-width-and-height-javascript
