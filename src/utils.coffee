@@ -5,6 +5,10 @@ E.cl = -> @classList
 E.hc = (c) -> @classList.contains(c)
 E.ac = (c) -> @classList.add(c); @
 E.rc = (c) -> @classList.remove(c); @
+
+# add and remove classes
+E.ar = (ac,rc) -> @classList.add(ac); @classList.remove(rc);
+
 E.tc = (c) -> @classList.toggle(c); @
 E.sc = (c) -> @className = c
 E.toggle_one = (c1,c2) -> 
@@ -108,12 +112,12 @@ isOutOfBounds = (y=null) ->
 
 # Gets the height of the viewport
 # http://andylangton.co.uk/blog/development/get-viewport-size-width-and-height-javascript
-getViewportHeight: ->
+getViewportHeight =  ->
   window.innerHeight or document.documentElement.clientHeight or document.body.clientHeight
 
 # gets document height, or viewport height if document too short
 # http://james.padolsey.com/javascript/get-document-height-cross-browser/
-getDocumentHeight: ->
+getDocumentHeight =  ->
   body = document.body
   documentElement = document.documentElement
   Math.max body.scrollHeight, documentElement.scrollHeight, body.offsetHeight, documentElement.offsetHeight, body.clientHeight, documentElement.clientHeight
